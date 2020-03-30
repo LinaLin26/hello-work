@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <td>口味</td>
+                    <td>
+                        <select>
+                            <option>原味</option>
+                        </select>  
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>製作克數</span></td>
+                    <td>
+                       <input type="text" id ="total" oninput="multiplyChange(),finalAnser()" onchange="proportion()"></div> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>製作份數</td>
+                    <td><input type="text" id ="multiply" value="1" oninput="totoalChang(),finalAnser()" onchange="proportion()"></td>
+                </tr>
+                <tr>
+                    <td>butter</td>
+                    <td><input type="text" class="source" value="100" onchange="finalAnser()"></td>
+                    <td><input id="01" type="text" class="recalculate" oninput="" onchange="proportion(this),finalAnser()"></td>
+                </tr>
+                <tr>
+                    <td>egg</td>
+                    <td><input type="text" class="source" value="20" onchange="finalAnser()"></td>
+                    <td><input id="02" type="text" class="recalculate" oninput="" onchange="proportion(this),finalAnser()"></td>
+                </tr>
+                <tr>
+                    <td>sugar</td>
+                    <td><input type="text" class="source" value="40" onchange="finalAnser()"></td>
+                    <td><input id="03" type="text" class="recalculate" oninput="" onchange="proportion(this),finalAnser()"></td>
+                </tr>
+                <tr>
+                    <td>flour</td>
+                    <td><input type="text" class="source" value="100" onchange="finalAnser()"></td>
+                    <td><input id="04" type="text" class="recalculate" oninput="" onchange="proportion(this),finalAnser()"></td>
+                </tr>
+            </table>
+        </div>
+        
+    </body>
+
+    <script>
+        let total = document.getElementById('total');//製作克數 
+        let multiply = document.getElementById('multiply');//製作份數   
+        let source = document.querySelectorAll('.source');//材料表
+        let recalculate = document.querySelectorAll('.recalculate');//所需材料
+        // let proportion;
+
+        function totoalChang() {
+            total.value = parseFloat(multiply.value) * 200;
+        }
+
+        function multiplyChange(){
+            multiply.value = parseFloat(total.value) / 200;
+        }
+
+        function finalAnser(){
+            for (let i = 0; i < 8; i++ ) {
+            recalculate[i].value = source[i].value * parseFloat(multiply.value);
+            }
+            
+        }
+        function proportion(check){
+            for (let i = 0; i < 4; i++ ) {
+                if (recalculate[i] === check) {
+                    multiply.value = parseFloat(recalculate[i].value / source[i].value).toFixed(1);
+                    totoalChang();
+                }
+            
+            }
+        }
+        function sourceChange(check){
+            for (let i = 0; i < 4; i++ ) {
+                if (recalculate[i] === check) {
+                    multiply.value = parseFloat(recalculate[i].value / source[i].value).toFixed(1);
+                    totoalChang();
+                }
+            
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body,input,select{
+            font-family: "微軟正黑體";
+        }
+        body{
+            background-color: #f7f7f7;
+        }
+        table{
+            margin: auto;
+        }
+    </style>
+</html>
